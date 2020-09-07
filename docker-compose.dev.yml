@@ -1,6 +1,5 @@
 version: "3.7"
 services:
-
   backend:
     image: python:3.6
     volumes:
@@ -34,6 +33,22 @@ services:
       - backend
     networks:
       - network-frontend
+  # 以下追加###
+  https-portal:
+    build:
+        context: ./Docker/https-portal
+        dockerfile: Dockerfile
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./log:/var/log/nginx
+    environment:
+      STAGE: 'local'
+      TZ: 'Asia/Tokyo'
+      ERROR_LOG: default
+      ACCESS_LOG: default
+    ### 
 
   postgres:
     image: postgres:12.0-alpine
