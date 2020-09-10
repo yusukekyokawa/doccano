@@ -41,7 +41,7 @@ services:
 
       
    # 以下追加###
-   https-portal:
+  https-portal:
     build:
         context: ./Docker/https-portal
         dockerfile: Dockerfile
@@ -55,7 +55,7 @@ services:
       TZ: 'Asia/Tokyo'
       ERROR_LOG: default
       ACCESS_LOG: default
-    ### 
+  ### 
 
   
 
