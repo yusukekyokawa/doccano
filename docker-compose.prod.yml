@@ -26,6 +26,7 @@ services:
     environment:
       GOOGLE_TRACKING_ID: ""
 
+
   nginx:
     build: ./nginx
     volumes:
