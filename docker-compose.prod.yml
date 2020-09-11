@@ -25,22 +25,24 @@ services:
       - www:/app/dist
     environment:
       GOOGLE_TRACKING_ID: ""
-
-
-  nginx:
-    build: ./nginx
-    volumes:
-      - www:/var/www/html:ro
-      - static_volume:/static
-    ports:
-      - 80:80
-    depends_on:
-      - backend
     networks:
       - network-frontend
 
+
+  # nginx:
+  #   build: ./nginx
+  #   volumes:
+  #     - www:/var/www/html:ro
+  #     - static_volume:/static
+  #   ports:
+  #     - 80:80
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - network-frontend
+
       
-   # 以下追加###
+  #  以下追加###
   https-portal:
     build:
         context: ./Docker/https-portal
@@ -50,11 +52,17 @@ services:
       - '443:443'
     volumes:
       - ./log:/var/log/nginx
+      - www:/var/www/html:ro
+      - static_volume:/static
+    depends_on:
+      - backend
     environment:
       STAGE: 'local'
       TZ: 'Asia/Tokyo'
       ERROR_LOG: default
       ACCESS_LOG: default
+    networks:
+      - network-frontend
   ### 
 
   
