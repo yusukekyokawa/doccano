@@ -1,11 +1,13 @@
 version: "3.7"
 services:
   backend:
-    image: python:3.6
+    build:
+      context: ./Docker/backend
+      dockerfile: Dockerfile
     volumes:
       - .:/src
       - venv:/src/venv
-    command: ["/src/app/tools/dev-django.sh", "0.0.0.0:8000"]
+    command: ["/src/app/tools/dev-django.sh", "0.0.0.0:8000"], ["npm","install"]
     environment:
       ADMIN_USERNAME: "admin"
       ADMIN_PASSWORD: "password"
