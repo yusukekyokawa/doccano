@@ -7,7 +7,10 @@ services:
     volumes:
       - .:/src
       - venv:/src/venv
-    command: ["/src/app/tools/dev-django.sh", "0.0.0.0:8000"], ["npm","install"]
+    command: bash -c "
+      /src/app/tools/dev-django.sh 0.0.0.0:8000 
+      && cd /src/app/server/static/package.json 
+      && npm start"
     environment:
       ADMIN_USERNAME: "admin"
       ADMIN_PASSWORD: "password"
