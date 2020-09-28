@@ -33,7 +33,7 @@ services:
       - .:/src
       - node_modules:/src/frontend/node_modules
     ports:
-      - 3000:3000
+      - 3000:80
     depends_on:
       - backend
     networks:
@@ -53,6 +53,8 @@ services:
       TZ: 'Asia/Tokyo'
       ERROR_LOG: default
       ACCESS_LOG: default
+    networks:
+     - network-frontend
     ### 
 
   postgres:
