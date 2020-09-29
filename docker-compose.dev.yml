@@ -7,10 +7,7 @@ services:
     volumes:
       - .:/src
       - venv:/src/venv
-    command: bash -c "
-      /src/app/tools/dev-django.sh 0.0.0.0:8000 
-      && cd /src/app/server/static/package.json 
-      && npm start"
+    command: ["/src/app/tools/dev-django.sh","0.0.0.0:8000"]
     environment:
       ADMIN_USERNAME: "admin"
       ADMIN_PASSWORD: "password"
@@ -33,7 +30,7 @@ services:
       - .:/src
       - node_modules:/src/frontend/node_modules
     ports:
-      - 3000:80
+      - 3000:3000
     depends_on:
       - backend
     networks:
@@ -50,11 +47,14 @@ services:
       - ./log:/var/log/nginx
     environment:
       STAGE: 'local'
+      DOMAINS: 'localhost -> http://frontend:3000'
       TZ: 'Asia/Tokyo'
       ERROR_LOG: default
       ACCESS_LOG: default
     networks:
      - network-frontend
+    depends_on:
+      - backend
     ### 
 
   postgres:

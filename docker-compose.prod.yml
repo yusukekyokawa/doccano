@@ -4,6 +4,11 @@ services:
   backend:
     build: ./app
     command: ["/app/tools/run.sh"]
+    # command: bash -c "
+    #   /app/tools/run.sh
+    #   && cd /app/server/static/ 
+    #   && npm install
+    #   && npm start"
     volumes:
       - static_volume:/app/staticfiles
     environment:
@@ -12,7 +17,7 @@ services:
       ADMIN_EMAIL: "admin@example.com"
       DATABASE_URL: "postgres://doccano:doccano@postgres:5432/doccano?sslmode=disable"
       ALLOW_SIGNUP: "False" #変更Trueに
-      DEBUG: "False"
+      DEBUG: "True"
     depends_on:
       - postgres
     networks:
@@ -36,11 +41,12 @@ services:
   #     - 80:80
   #   depends_on:
   #     - backend
+
   #   networks:
   #     - network-frontend
 
       
-  #  以下追加###
+  #以下追加###
   https-portal:
     build:
         context: ./Docker/https-portal
@@ -52,16 +58,19 @@ services:
       - ./log:/var/log/nginx
       - www:/var/www/html:ro
       - static_volume:/static
+    restart: always
     depends_on:
       - backend
+      - frontend
     environment:
       STAGE: 'local'
+      # DOMAINS: 'localhost -> http://frontend:3000'
       TZ: 'Asia/Tokyo'
       ERROR_LOG: default
       ACCESS_LOG: default
     networks:
-      - network-frontend
-  ## 
+      #  - network-backend
+       - network-frontend
 
   
 
