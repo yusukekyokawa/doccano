@@ -49,7 +49,7 @@ services:
       - ./html:/var/www/vhosts/
     environment:
       STAGE: 'local'
-      DOMAINS: 'doccano.com -> http://frontend:3000, doccano-admin.com -> http://backend:8000/admin'
+      DOMAINS: 'localhost -> http://frontend:3000, doccano-admin.com -> http://backend:8000'
       TZ: 'Asia/Tokyo'
       ERROR_LOG: default
       ACCESS_LOG: default
