@@ -45,9 +45,11 @@ services:
       - '443:443'
     volumes:
       - ./log:/var/log/nginx
+      - ./certs:/var/lib/https-portal
+      - ./html:/var/www/vhosts/
     environment:
       STAGE: 'local'
-      DOMAINS: 'localhost -> http://frontend:3000'
+      DOMAINS: 'doccano.com -> http://frontend:3000, doccano-admin.com -> http://backend:8000/admin'
       TZ: 'Asia/Tokyo'
       ERROR_LOG: default
       ACCESS_LOG: default
