@@ -7,7 +7,12 @@ services:
     volumes:
       - .:/src
       - venv:/src/venv
-    command: ["/src/app/tools/dev-django.sh","0.0.0.0:8000"]
+    # command: ["/src/app/tools/dev-django.sh","0.0.0.0:8000"]
+    command: bash -c "
+       /src/app/tools/dev-django.sh 0.0.0.0:8000
+       && cd /src/app/server/static/package.json
+       && npm install
+       && npm start"
     environment:
       ADMIN_USERNAME: "admin"
       ADMIN_PASSWORD: "password"
@@ -48,8 +53,9 @@ services:
       - ./certs:/var/lib/https-portal
       - ./html:/var/www/vhosts/
     environment:
-      STAGE: 'local'
-      DOMAINS: 'localhost -> http://frontend:3000, doccano-admin.com -> http://backend:8000'
+      STAGE: 'production'
+     #  DOMAINS: 'localhost -> http://frontend:3000, doccano-admin.com -> http://backend:8000'
+      DOMAINS: 'tk2.cc.gakushuin.ac.jp -> http://frontend:3000'
       TZ: 'Asia/Tokyo'
       ERROR_LOG: default
       ACCESS_LOG: default

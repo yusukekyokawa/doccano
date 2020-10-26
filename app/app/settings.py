@@ -345,5 +345,7 @@ if DEBUG:
         'http://127.0.0.1:3000',
         'http://0.0.0.0:3000',
         'http://localhost:3000',
-        'https://localhost'
+        'https://localhost',
+        'https://tk2.cc.gakushuin.ac.jp',
+	'https://tk2.cc.gakushuin.ac.jp:54435'
     )
