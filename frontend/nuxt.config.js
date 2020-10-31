@@ -26,12 +26,14 @@ export default {
     ]
   },
 
+  // server: {
+  //   host: '0.0.0.0' // default: localhost
+  // },
   server: {
-    host: '0.0.0.0' // default: localhost
+    host: '0.0.0.0'
   },
-
   env: {
-    baseUrl: process.env.NODE_ENV === 'production' ? '/v1' : 'http://127.0.0.1:8000/v1'
+    baseUrl: process.env.NODE_ENV === 'production' ? '/v1' : 'http://backend:8000/v1'
   },
 
   /*

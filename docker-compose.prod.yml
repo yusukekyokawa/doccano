@@ -30,6 +30,8 @@ services:
       - www:/app/dist
     environment:
       GOOGLE_TRACKING_ID: ""
+    depends_on:
+      - backend
 
 
   # nginx:
@@ -63,13 +65,12 @@ services:
       - backend
       - frontend
     environment:
-      STAGE: 'local'
-      # DOMAINS: 'localhost -> http://frontend:3000'
+      STAGE: 'production'
+      DOMAINS: 'tk2.cc.gakushuin.ac.jp -> http://backend'
       TZ: 'Asia/Tokyo'
       ERROR_LOG: default
       ACCESS_LOG: default
     networks:
-      #  - network-backend
        - network-frontend
 
   
